@@ -1,6 +1,6 @@
 echo "█████ STEP 0/7 -define arguments"
 # directory where we cloned the dojopy package
-WORKING_DIR=${1:-$HOME/Documents/dojopip}
+WORKING_DIR="/home/tsbertalan/Dropbox/Projects/Dojo/"
 # directory where python environment will be installed
 ENV_DIR=${2:-$WORKING_DIR/auto_generated_dojo_env}
 # directory of the cloned dojopy package
@@ -20,17 +20,15 @@ echo "PY_VERSION" $PY_VERSION
 echo "PYENV_DIR" $PYENV_DIR
 echo "PY_PATH" $PY_PATH
 
-# This tutorial was performed as the root user on Ubuntu 18.04.
-
 echo "█████ STEP 1/7 - pyenv installation"
 echo "█████ stage 1 - update and install dependencies"
-apt update -y
+sudo apt update -y
 
 
 echo "█████ stage 2 - install all of pyenv’s dependencies"
-apt install -y make build-essential libssl-dev zlib1g-dev \
+sudo apt install -y make build-essential libssl-dev zlib1g-dev \
 > libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev\
-> libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl\
+> libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev libjpeg-dev python-openssl\
 > git
 
 

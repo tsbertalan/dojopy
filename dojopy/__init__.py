@@ -15,7 +15,7 @@ def install(ENV_DIR="", *, confirm=False):
     WORKING_DIR = dirname(dirname(abspath(__file__)))
     FILE_DIR = dirname(abspath(__file__))
     p = subprocess.Popen(
-        ["sudo", "bash", join(FILE_DIR, "install_dojopy.bash"), WORKING_DIR, ENV_DIR],
+        ["bash", join(FILE_DIR, "install_dojopy.bash"), WORKING_DIR, ENV_DIR],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True)
