@@ -1,14 +1,16 @@
+#!/bin/bash
+set -e
 echo "█████ STEP 0/7 -define arguments"
 # directory where we cloned the dojopy package
 WORKING_DIR="/home/tsbertalan/Dropbox/Projects/Dojo/"
 # directory where python environment will be installed
-ENV_DIR=${2:-$WORKING_DIR/auto_generated_dojo_env}
+ENV_DIR=${WORKING_DIR}/auto_generated_dojo_env
 # directory of the cloned dojopy package
-DOJOPY_DIR=${3:-$WORKING_DIR/dojopy}
+DOJOPY_DIR=${$WORKING_DIR}/dojopy
 # directory where pyenv will be installed
-PYENV_DIR=${4:-$HOME/.pyenv}
+PYENV_DIR=${HOME}/.pyenv
 # version of python that we will install
-PY_VERSION=${5:-3.8.2}
+PY_VERSION=3.8.2
 # custom python path
 PY_PATH=${PYENV_DIR}/versions/${PY_VERSION}/bin/python3
 
@@ -45,8 +47,8 @@ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi
 source ~/.bashrc # not sure this is needed
 
 
-echo "█████ stage 5 - verify the installation - display list of available python versions"
-$PYENV_DIR/bin/pyenv install --list
+# echo "█████ stage 5 - verify the installation - display list of available python versions"
+# $PYENV_DIR/bin/pyenv install --list
 
 echo "█████ STEP 2/7 - build a custom python binary with pyenv"
 echo "█████ stage 1 - we use pyenv to build a custom python binary in ${PYENV_DIR}"
@@ -65,7 +67,14 @@ $PY_PATH -m pip install virtualenv
 echo "█████ /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\/!\need to delete this line"
 rm -rf $ENV_DIR
 $PY_PATH -m venv $ENV_DIR
+
+# If we're currently in a virtual env, exit it.
+if [[ "$VIRTUAL_ENV" != "" ]]
+then
+	deactivate
+fi
 source ${ENV_DIR}/bin/activate
+
 
 
 echo "█████ STEP 4/7 - add dependencies to the newly created virtual environment located at $ENV_DIR"

@@ -34,4 +34,11 @@ def install(*, confirm=False):
     # print("█████ stage 3 - add Julia packages: PyCall, Dojo -- build PyCall -- compile PyCall and Dojo")
     # subprocess.check_call([julia, os.path.join(script_dir, "add_julia_packages.jl")], env=env)
 
+    julia = _find_julia()
+    subprocess.check_output(
+        julia,
+        '-e',
+        'Pkg.add("Dojo")',
+    )
+
 install()
